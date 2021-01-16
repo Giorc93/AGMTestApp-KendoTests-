@@ -1,7 +1,7 @@
 import Routing from "./Routing";
 
-import NavBar from "./components/material/NavBar";
 import AppContainer from "./components/material/AppContainer";
+import NavBar from "./components/material/NavBar";
 
 function App() {
   return (

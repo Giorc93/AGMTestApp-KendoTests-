@@ -1,5 +1,6 @@
 import React from "react";
-
+//TODO: Add company logo
+//TODO: Menu drawer
 import { NearMe as NearMeIcon } from "@material-ui/icons";
 import {
   AppBar,

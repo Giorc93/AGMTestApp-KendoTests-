@@ -24,7 +24,6 @@ export const userDataSlice = createSlice({
       };
     },
     savePlaceData: (state, action) => {
-      console.log(action.payload);
       state.userData = {
         placeData: action.payload,
       };
@@ -32,8 +31,9 @@ export const userDataSlice = createSlice({
   },
 });
 
+//Exp. actions
 export const { saveUserData, savePlaceData } = userDataSlice.actions;
-
+//Exp. selectors
 export const selectUserData = (state) => state.userData;
 
 export default userDataSlice.reducer;

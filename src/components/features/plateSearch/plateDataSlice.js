@@ -47,6 +47,7 @@ const plateDataSlice = createSlice({
       };
     },
   },
+  //Handling API response
   extraReducers: {
     [getVehicleDataByPlate.pending]: (state, action) => {
       state.plateResponse.status = "loading";
@@ -61,9 +62,12 @@ const plateDataSlice = createSlice({
   },
 });
 
+//Exp. actions
 export const { savePlateNumber } = plateDataSlice.actions;
 
+//PlateData state val
 export const selectPlateData = (state) => state.plateData.plateData;
+//API response data state val
 export const selectPlateResponse = (state) => state.plateData.plateResponse;
 
 export default plateDataSlice.reducer;

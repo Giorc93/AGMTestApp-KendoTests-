@@ -1,5 +1,7 @@
 import React from "react";
 
+//TODO: Add styles to form
+
 import { withRouter, useHistory } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Grid, Button } from "@material-ui/core";
@@ -12,6 +14,7 @@ import Input from "../../material/Input";
 import Form from "../../material/Form";
 
 const schema = yup.object().shape({
+  //TODO: Modify REGEXP to plate validation (Plate formart)
   plateNumber: yup
     .string()
     .matches(/^(^[0-9A-Za-z]*)$/, "No se permiten carácteres especiales")

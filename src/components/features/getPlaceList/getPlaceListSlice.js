@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+//API Req. using test token
 export const getPlaceListByString = createAsyncThunk(
   "place/getPlaceListByString",
   async () => {
@@ -7,6 +8,8 @@ export const getPlaceListByString = createAsyncThunk(
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append(
       "Cookie",
+      //TODO: Test using consultant account.
+      //Test token
       "XSRF-TOKEN=eyJpdiI6IjNPaWRDSUZVeDdpSzJIVzdhVDR1N2c9PSIsInZhbHVlIjoiSmNyUHNKWUJvZWEyN1hsRWhUQWZYTTcxbmtSVVVMbXdyYXg1Ulp1bG9NaW8rS2xkMkpOTHhHVmRVVnBxaVdrWiIsIm1hYyI6IjZjMDU5YmM4ZWM3ODgwYjg0MTZmZmY2NTExNjhhY2IwMTg0M2I1OTEyMDU2Nzg4NTliNDAyZGEwZWZlMDgxZGEifQ%3D%3D; agentemotor_session=eyJpdiI6ImZcL0MwVkxDK3kxOUtxTWZxdU1iWENnPT0iLCJ2YWx1ZSI6IlBJWGpwYVdzUXYrTER0RG1PbkN3VEk1XC9cLzJ1SFJnUWQrS2t0T3pcL0FhZjBzNTd3NUh0RDJlZ3lLa0o1K284VGkiLCJtYWMiOiJkOWNlMjQzY2UzYWFlOGM0ZTkyZjAzYjk2MjgwOTZkMjIzZWVhZjI5NmU0YThiM2M4NTdlZjU2ZjRjYTQ2MzhhIn0%3D"
     );
 
@@ -14,6 +17,8 @@ export const getPlaceListByString = createAsyncThunk(
       name: "event-ubication-get-list-place",
       timestamp: "dog",
       origin: "api.consume",
+      //TODO: Set "alls" as def. value on async() fn. city_name: placeStr
+      //"alls" str loads the entire places obj.
       data: { city_name: "alls" },
     });
 
@@ -52,6 +57,7 @@ const getPlaceListSlice = createSlice({
   },
 });
 
+//Exp. state value (useSelector)
 export const selectPlaceResponse = (state) => state.placeData.placeResponseData;
 
 export default getPlaceListSlice.reducer;

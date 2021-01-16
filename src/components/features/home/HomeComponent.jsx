@@ -1,5 +1,6 @@
 import React from "react";
-
+//TODO: Add company logo and color palette
+//TODO: Create drawer menu
 import {
   Button,
   Card,

@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 
 import { Grid, Typography, Button } from "@material-ui/core";
 import { withRouter, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 
 import {
@@ -21,6 +21,8 @@ import Input from "../../material/Input";
 import Form from "../../material/Form";
 
 const schema = yup.object().shape({
+  //TODO: Mod. phone REGEXP
+  //TODO: Add birthDate validation
   firstName: yup
     .string()
     .matches(/^(^[A-Za-z ]*)$/, "Formato inválido")
@@ -56,6 +58,7 @@ const UserDataFormComponent = () => {
     console.log(errors);
   }, []);
 
+  //Exec. placeData fn to load full place obj.
   const handlePlaceChange = (placeData) => {
     dispatch(savePlaceData(placeData));
   };
@@ -128,7 +131,9 @@ const UserDataFormComponent = () => {
             <AutocompleteC
               name="placeData"
               label="Ciudad"
+              //Sending place fn as prop to save entire placeData obj
               regPlaceData={handlePlaceChange}
+              //Using register to handle input validation only
               ref={register}
               error={!!errors.placeData}
               helperText={errors?.placeData?.message}
@@ -138,6 +143,7 @@ const UserDataFormComponent = () => {
           <Grid container item xs={12} justify="center">
             <Button
               type="submit"
+              //TODO: Set disabled as true by default
               disabled={Object.keys(errors).length === 0 ? false : true}
               variant="contained"
               color="primary"
