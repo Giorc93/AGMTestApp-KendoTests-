@@ -55,7 +55,6 @@ const UserDataFormComponent = () => {
 
   useEffect(() => {
     dispatch(getPlaceListByString());
-    console.log(errors);
   }, []);
 
   //Exec. placeData fn to load full place obj.

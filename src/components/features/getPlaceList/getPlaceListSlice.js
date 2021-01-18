@@ -28,6 +28,7 @@ export const getPlaceListByString = createAsyncThunk(
       body: raw,
       redirect: "follow",
     };
+
     return await fetch(
       "http://api.app.agentemotor.com/insurances/ubication/actions/get",
       requestOptions

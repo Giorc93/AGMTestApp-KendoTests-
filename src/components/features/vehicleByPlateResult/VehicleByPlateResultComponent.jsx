@@ -14,7 +14,6 @@ const VehicleByPlateResult = () => {
   const plateResponse = useSelector(selectPlateResponse);
   const vehicleData =
     plateResponse.data.length > 0 ? plateResponse.data[0].vehicle : undefined;
-
   console.log(vehicleData);
 
   return (

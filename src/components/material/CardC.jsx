@@ -1,5 +1,5 @@
 import React from "react";
-
+// Car Result Card Component
 import {
   Button,
   Card,
@@ -12,6 +12,7 @@ import {
   Divider,
   Grid,
 } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CardC = (props) => {
+  const history = useHistory();
   const styles = useStyles();
   const refValue = new Intl.NumberFormat("es-CO", {
     style: "currency",
@@ -122,6 +124,7 @@ const CardC = (props) => {
           variant="contained"
           size="small"
           color="default"
+          onClick={() => history.push("/ecf")}
         >
           No es mi vehiculo
         </Button>
