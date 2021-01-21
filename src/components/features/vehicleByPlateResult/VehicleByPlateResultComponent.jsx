@@ -1,15 +1,6 @@
 import React, { Fragment } from "react";
 //TODO: Add styles
-import {
-  Card,
-  CardContent,
-  CardActions,
-  Button,
-  CardMedia,
-  Typography,
-  makeStyles,
-  CircularProgress,
-} from "@material-ui/core";
+import { makeStyles, CircularProgress } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 

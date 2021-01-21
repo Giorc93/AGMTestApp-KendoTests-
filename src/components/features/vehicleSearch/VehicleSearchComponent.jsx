@@ -55,7 +55,7 @@ const VehicleSearchComponent = () => {
           <SubHeader>{title}</SubHeader>
           <Divider className={styles.dividerMargin} />
           <Grid container justify="center">
-            <Grid item x={12}>
+            <Grid item xs={12}>
               {toggler && <PlateSearchComponent />}
               {!toggler && <ReferenceSearchComponent />}
             </Grid>

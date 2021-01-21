@@ -44,7 +44,6 @@ const referenceDataSlice = createSlice({
       state.vehicleByRef.status = "loading";
     },
     [getVehicleDataByRef.fulfilled]: (state, action) => {
-      console.log(action.payload);
       state.vehicleByRef.data = action.payload;
       state.vehicleByRef.status = "success";
     },
