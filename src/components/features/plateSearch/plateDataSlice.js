@@ -53,8 +53,9 @@ const plateDataSlice = createSlice({
       state.plateResponse.status = "loading";
     },
     [getVehicleDataByPlate.fulfilled]: (state, action) => {
+      console.log(action.payload);
       state.plateResponse.data = action.payload;
-      state.plateResponse.status = "success";
+      state.plateResponse.status = "failed";
     },
     [getVehicleDataByPlate.rejected]: (state, action) => {
       state.plateResponse.status = "failed";

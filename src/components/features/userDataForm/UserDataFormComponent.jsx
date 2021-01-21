@@ -12,44 +12,28 @@ import {
   selectPlaceResponse,
 } from "../getPlaceList/getPlaceListSlice";
 import { saveUserData, savePlaceData } from "./userDataSlice";
+import { idTypeArr, genderArr } from "../../utils/inputArrays";
+import { yupSchema } from "./userDataUtils";
 
 import MainContainer from "../../material/MainContainer";
 import AutocompleteC from "../../material/AutocompleteC";
+import SelectInput from "../../material/SelectInput";
+import RadioButton from "../../material/RadioButton";
 import DatePicker from "../../material/DatePicker";
 import SubHeader from "../../material/SubHeader";
 import Input from "../../material/Input";
 import Form from "../../material/Form";
 
-const schema = yup.object().shape({
-  //TODO: Mod. phone REGEXP
-  //TODO: Add birthDate validation
-  firstName: yup
-    .string()
-    .matches(/^(^[A-Za-z ]*)$/, "Formato inválido")
-    .required("Introduce tu nombre"),
-  lastName: yup
-    .string()
-    .matches(/^(^[A-Za-z ]*)$/, "Formato inválido")
-    .required("Introduce tu apellido"),
-  email: yup
-    .string()
-    .email("Introduce una dirección de correo válida")
-    .required("Introduce tu dirección de correo"),
-  phoneNumber: yup
-    .string()
-    .matches(/^(^[0-9]*)$/, "Formato inválido")
-    .min(10, "Formato inválido")
-    .max(10, "Formato inválido")
-    .required("Introduce tu número de teléfono"),
-  placeData: yup.string().required("Introduce la ciudad"),
-});
+const schema = yup.object().shape(yupSchema);
 
 const UserDataFormComponent = () => {
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors, control } = useForm({
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
   const placeData = useSelector(selectPlaceResponse);
+
+  //Validate Response status
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -65,6 +49,7 @@ const UserDataFormComponent = () => {
   const onSubmit = (data) => {
     dispatch(saveUserData(data));
     history.push("/vehicleByPlateResult");
+    //console.log(data);
   };
   return (
     <MainContainer>
@@ -94,6 +79,29 @@ const UserDataFormComponent = () => {
               ref={register}
               error={!!errors.lastName}
               helperText={errors?.lastName?.message}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <SelectInput
+              options={idTypeArr}
+              name="idType"
+              control={control}
+              ref={register}
+              label="Tipo de Documento"
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <RadioButton control={control} name="gender" options={genderArr} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Input
+              type="text"
+              fullWidth
+              label="Número de Documento"
+              name="idNumber"
+              ref={register}
+              error={!!errors.idNumber}
+              helperText={errors?.idNumber?.message}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -136,7 +144,7 @@ const UserDataFormComponent = () => {
               ref={register}
               error={!!errors.placeData}
               helperText={errors?.placeData?.message}
-              options={placeData.data}
+              options={placeData}
             />
           </Grid>
           <Grid container item xs={12} justify="center">
@@ -158,3 +166,12 @@ const UserDataFormComponent = () => {
 };
 
 export default withRouter(UserDataFormComponent);
+
+/*
+<SelectInput
+              options={idTypeArr}
+              name="idType"
+              ref={register}
+              label="Tipo de Documento"
+            />
+*/

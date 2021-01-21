@@ -13,7 +13,7 @@ export const insurableObjectType = [
 //RISK
 
 export const riskTypeArr = [
-  { value: "all_risk_vehicle", label: "Todo Riesgo Vehiculo" },
+  { value: "all_risk_vehicle", label: "Todo Riesgo - Vehiculo" },
   { value: "soat_risk_vehicle", label: "SOAT" },
 ];
 
@@ -96,14 +96,14 @@ export const idTypeArr = [
   //TODO: Check "PA" API Schema value
   { value: "CC", label: "Cédula de Ciudadanía" },
   { value: "TI", label: "Tarjeta de Identidad" },
-  { value: "CE", label: "Cédula de extranjería" },
+  { value: "CE", label: "Cédula de Extranjería" },
   { value: "RC", label: "Registro Civil" },
   { value: "NIT", label: "NIT" },
 ];
 
 export const genderArr = [
   { value: "M", label: "Masculino" },
-  { value: "Femenino", label: "Femenino" },
+  { value: "F", label: "Femenino" },
 ];
 
 export const socEconLevelArr = ["1", "2", "3", "4", "5", "6"];

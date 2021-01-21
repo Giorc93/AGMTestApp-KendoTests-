@@ -21,6 +21,9 @@ export const userDataSlice = createSlice({
         email: action.payload.email,
         phoneNumber: action.payload.phoneNumber,
         placeData: state.userData.placeData,
+        idType: action.payload.idType,
+        idNumber: action.payload.idNumber,
+        gender: action.payload.gender,
       };
     },
     savePlaceData: (state, action) => {

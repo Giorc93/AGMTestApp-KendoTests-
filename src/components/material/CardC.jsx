@@ -133,6 +133,7 @@ const CardC = (props) => {
           variant="contained"
           size="small"
           color="primary"
+          onClick={() => history.push("/getQuotation")}
         >
           ¡Es mi vehiculo!
         </Button>

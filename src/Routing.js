@@ -3,7 +3,8 @@ import { Route, Switch } from "react-router-dom";
 
 import VehicleByPlateResultComponent from "./components/features/vehicleByPlateResult/VehicleByPlateResultComponent";
 import VehicleSearchComponent from "./components/features/vehicleSearch/VehicleSearchComponent";
-import userDataFormComponent from "./components/features/userDataForm/UserDataFormComponent";
+import UserDataFormComponent from "./components/features/userDataForm/UserDataFormComponent";
+import GetQuotationComponent from "./components/features/getQuotation/GetQuotationComponent";
 import ErrorComponent from "./components/features/error/ErrorComponent";
 import HomeComponent from "./components/features/home/HomeComponent";
 import TestComponent from "./components/features/test/TestComponent";
@@ -14,8 +15,10 @@ const Routing = () => {
       <Route exact path="/" component={HomeComponent} />
       <Route exact path="/home" component={HomeComponent} />
       <Route exact path="/test" component={TestComponent} />
-      <Route exact path="/userDataForm" component={userDataFormComponent} />
+      <Route exact path="/userDataForm" component={UserDataFormComponent} />
       <Route exact path="/vehicleSearch" component={VehicleSearchComponent} />
+      <Route exact path="/getQuotation" component={GetQuotationComponent} />
+
       <Route
         exact
         path="/vehicleByPlateResult"
