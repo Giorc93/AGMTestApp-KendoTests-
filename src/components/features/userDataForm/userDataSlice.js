@@ -1,17 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  userData: {
+    firstName: "",
+    lastName: "",
+    birthDate: "",
+    email: "",
+    phoneNumber: "",
+    placeData: "",
+  },
+};
+
 export const userDataSlice = createSlice({
   name: "userData",
-  initialState: {
-    userData: {
-      firstName: "",
-      lastName: "",
-      birthDate: "",
-      email: "",
-      phoneNumber: "",
-      placeData: "",
-    },
-  },
+  initialState,
   reducers: {
     saveUserData: (state, action) => {
       state.userData = {
@@ -31,6 +33,7 @@ export const userDataSlice = createSlice({
         placeData: action.payload,
       };
     },
+    resetState: (state) => initialState,
   },
 });
 

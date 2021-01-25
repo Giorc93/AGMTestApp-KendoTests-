@@ -34,16 +34,15 @@ const PlateSearchComponent = () => {
   const onSubmit = (data) => {
     dispatch(savePlateNumber(data));
     dispatch(getVehicleDataByPlate(data.plateNumber));
-    history.push("/userDataForm");
+    history.push("/vehicleByPlateResult");
   };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
+      <Grid container spacing={2} justify="center">
+        <Grid container item xs={12} justify="center">
           <Input
             type="text"
-            fullWidth
             label="Número De Placa"
             name="plateNumber"
             ref={register}
@@ -51,8 +50,8 @@ const PlateSearchComponent = () => {
             helperText={errors?.plateNumber?.message}
           />
         </Grid>
-        <Grid item xs={12}>
-          <Button type="submit" variant="outlined" color="primary" fullWidth>
+        <Grid container item xs={12} justify="center">
+          <Button type="submit" variant="outlined" color="primary">
             Consultar
           </Button>
         </Grid>

@@ -16,8 +16,9 @@ import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    maxWidth: 500,
     minWidth: 345,
+    marginBottom: theme.spacing(2),
   },
   media: {
     height: 140,
@@ -73,12 +74,14 @@ const CardC = (props) => {
                 {props.vehData.codification.line3}
               </Typography>
             </Grid>
-            <Grid item xs={12} md={6}>
-              <Typography variant="body1" color="textSecondary">
-                <strong>Placa: </strong>
-                {props.vehData.plate.toUpperCase()}
-              </Typography>
-            </Grid>
+            {props.vehData.plate && (
+              <Grid item xs={12} md={6}>
+                <Typography variant="body1" color="textSecondary">
+                  <strong>Placa: </strong>
+                  {props.vehData.plate.toUpperCase()}
+                </Typography>
+              </Grid>
+            )}
             <Grid item xs={12} md={6}>
               <Typography
                 variant="body1"
@@ -104,7 +107,7 @@ const CardC = (props) => {
             <Grid item xs={12} md={6}>
               <Typography variant="body1" color="textSecondary">
                 <strong>Cilindraje: </strong>
-                {props.vehData.cylinder}
+                {props.vehData.cylinder} cm<sup>3</sup>
               </Typography>
             </Grid>
             <Grid item xs={12}>

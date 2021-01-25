@@ -10,16 +10,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AutocompleteC = forwardRef((props, ref) => {
+const BrandsAutocomplete = forwardRef((props, ref) => {
   const styles = useStyles();
-  const placeData = props.options;
+  const brandsData = props.options;
   return (
     <Fragment>
-      {placeData.status === "loading" && (
+      {brandsData.status === "loading" && (
         <Autocomplete
           className={styles.root}
           options={[
-            { val: "Cargando", label: "Obteniendo listado de ciudades..." },
+            { val: "Cargando", label: "Obteniendo listado de marcas..." },
           ]}
           autoHighlight
           getOptionLabel={(option) => option.val}
@@ -38,19 +38,15 @@ const AutocompleteC = forwardRef((props, ref) => {
           )}
         />
       )}
-      {placeData.status === "success" && (
+      {brandsData.status === "success" && (
         <Autocomplete
           className={styles.root}
-          options={placeData.data}
+          options={brandsData.data}
           autoHighlight
-          onChange={(e, val) => props.regPlaceData(val)}
-          getOptionLabel={(option) =>
-            `${option.city_name} - ${option.state_name}`
-          }
+          getOptionLabel={(option) => option}
           renderOption={(option) => (
             <Fragment>
-              <span>{option.city_name} - </span>
-              <strong>{option.state_name}</strong>
+              <span>{option}</span>
             </Fragment>
           )}
           renderInput={(params) => (
@@ -63,7 +59,7 @@ const AutocompleteC = forwardRef((props, ref) => {
           )}
         />
       )}
-      {placeData.status === "failed" && (
+      {brandsData.status === "failed" && (
         <>
           <Autocomplete
             className={styles.root}
@@ -79,7 +75,7 @@ const AutocompleteC = forwardRef((props, ref) => {
             )}
           />
           <Alert severity="error">
-            Lista de ciudades no disponible - Recargar...
+            Lista de marcas no disponible - Recargar...
           </Alert>
         </>
       )}
@@ -87,23 +83,4 @@ const AutocompleteC = forwardRef((props, ref) => {
   );
 });
 
-export default AutocompleteC;
-
-/*
-<Autocomplete
-      className={styles.root}
-      options={props.options}
-      autoHighlight
-      onChange={(e, val) => props.regPlaceData(val)}
-      getOptionLabel={(option) => `${option.city_name} - ${option.state_name}`}
-      renderOption={(option) => (
-        <Fragment>
-          <span>{option.city_name} - </span>
-          <strong>{option.state_name}</strong>
-        </Fragment>
-      )}
-      renderInput={(params) => (
-        <TextField inputRef={ref} {...props} {...params} variant="outlined" />
-      )}
-    />
-*/
+export default BrandsAutocomplete;

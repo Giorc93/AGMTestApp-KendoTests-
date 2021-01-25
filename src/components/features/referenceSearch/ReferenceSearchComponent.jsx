@@ -1,58 +1,76 @@
-import React, { useState } from "react";
-//TODO: Add AutoComplete field (Vehicle brands)
-//TODO: Add model field
-//TODO: Add AutoComplete field (Vehicle Ref)
-import { useHistory, withRouter } from "react-router-dom";
+import React, { useEffect } from "react";
+//TODO: Add yup Schema
 import { useDispatch, useSelector } from "react-redux";
 import { Grid, Button } from "@material-ui/core";
+import { withRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { getVehicleDataByRef, selectRefResponse } from "./referenceDataSlice";
+import { getVehicleDataByRef, resetState } from "./referenceDataSlice";
+import {
+  getBrandsList,
+  selectBrandsResponse,
+} from "../getBrandsList/getBrandsListSlice";
 
-import MainContainer from "../../material/MainContainer";
-import DataTable from "../../material/DataTable";
+import BrandsAutocomplete from "../../material/BrandsAutocomplete";
+import CarCards from "../../material/CarCards";
 import Input from "../../material/Input";
 import Form from "../../material/Form";
 
 const ReferenceSearchComponent = () => {
-  const refDataResponse = useSelector(selectRefResponse);
-  const refData = refDataResponse.data;
+  useEffect(() => {
+    dispatch(getBrandsList());
+
+    return dispatch(resetState());
+  }, []);
+
+  const brandsData = useSelector(selectBrandsResponse);
+
   const dispatch = useDispatch();
-  const history = useHistory();
+
   const { register, handleSubmit, errors } = useForm();
 
-  const getRef = () => {
-    dispatch(getVehicleDataByRef({ line: "camaro" }));
-    console.log(refDataResponse);
-  };
-
   const onSubmit = (data) => {
-    console.log(data);
+    dispatch(getVehicleDataByRef(data));
   };
   return (
     <>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Grid container>
-          <Grid item xs={12}>
+        <Grid container spacing={1}>
+          <Grid item xs={12} md={4}>
+            <BrandsAutocomplete
+              name="brand"
+              label="Marca"
+              ref={register}
+              options={brandsData}
+            />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Input
+              type="number"
+              fullWidth
+              label="Modelo"
+              name="model"
+              ref={register}
+            />
+          </Grid>
+          <Grid item xs={12} md={4}>
             <Input
               type="text"
               fullWidth
               label="Referencia"
-              name="vehBrand"
+              name="line"
               ref={register}
             />
           </Grid>
         </Grid>
-        <Button
-          onClick={() => getRef()}
-          variant="outlined"
-          color="primary"
-          fullWidth
-        >
-          Consultar
-        </Button>
+        <Grid container item xs={12} justify="center">
+          <Button type="submit" variant="outlined" size="large" color="primary">
+            Consultar
+          </Button>
+        </Grid>
       </Form>
-      <DataTable data={refData} />
+      <br />
+      <CarCards />
     </>
   );
 };

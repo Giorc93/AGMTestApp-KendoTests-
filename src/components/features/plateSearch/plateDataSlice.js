@@ -29,23 +29,26 @@ export const getVehicleDataByPlate = createAsyncThunk(
   }
 );
 
+const initialState = {
+  plateData: {
+    plateNumber: "",
+  },
+  plateResponse: {
+    status: "",
+    data: {},
+  },
+};
+
 const plateDataSlice = createSlice({
   name: "plateData",
-  initialState: {
-    plateData: {
-      plateNumber: "",
-    },
-    plateResponse: {
-      status: "",
-      data: {},
-    },
-  },
+  initialState,
   reducers: {
     savePlateNumber: (state, action) => {
       state.plateData = {
         plateNumber: action.payload.plateNumber,
       };
     },
+    resetState: (state) => initialState,
   },
   //Handling API response
   extraReducers: {
@@ -53,9 +56,8 @@ const plateDataSlice = createSlice({
       state.plateResponse.status = "loading";
     },
     [getVehicleDataByPlate.fulfilled]: (state, action) => {
-      console.log(action.payload);
       state.plateResponse.data = action.payload;
-      state.plateResponse.status = "failed";
+      state.plateResponse.status = "success";
     },
     [getVehicleDataByPlate.rejected]: (state, action) => {
       state.plateResponse.status = "failed";
@@ -64,7 +66,7 @@ const plateDataSlice = createSlice({
 });
 
 //Exp. actions
-export const { savePlateNumber } = plateDataSlice.actions;
+export const { savePlateNumber, resetState } = plateDataSlice.actions;
 
 //PlateData state val
 export const selectPlateData = (state) => state.plateData.plateData;

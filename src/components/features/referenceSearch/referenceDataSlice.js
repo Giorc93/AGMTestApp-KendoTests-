@@ -7,12 +7,18 @@ export const getVehicleDataByRef = createAsyncThunk(
     headers.append("Content-Type", "application/json");
     headers.append(
       "Cookie",
-      "XSRF-TOKEN=eyJpdiI6InE2V0xlb0N4YXhCb2lhTTM1bm1tSVE9PSIsInZhbHVlIjoiYlo5YXZvYXNQZjlNckl4Y0lIdTI3VFdXRjVVWnZJWlpTeEpCbk5rcVZJKzNYNWFReHhSNXFvU3RGK21rcld1SyIsIm1hYyI6ImUyMDMwNjU2YTNiYWQyZjhmNTFjOTQzYWQyYTc2MzRhZTQ1YmUyMGMzOTgwOTJiY2MyMjFiZGVmOTYxZDc4NWYifQ%3D%3D; agentemotor_session=eyJpdiI6IlB5U29rVFp0NFwvXC9UeXpoQWN1RDhBUT09IiwidmFsdWUiOiJpaG5jRnpsaTM2UFdlV1NKTXF1cGs5bnducytHeEZxXC9SMCt1dERxWWZ3dlhEeXBYQUFla2tYb1NiTHBFWFlwbCIsIm1hYyI6ImU1ODFiMzVhZDAyODZjYjcyNDI4M2EzMDE1ZGQ0OTkyNWQwY2QxZWZlOTg2ZGY0M2NkZTJlZGM5ZjAyMWMzZTcifQ%3D%3D"
+      "XSRF-TOKEN=eyJpdiI6IndXaVZ2aFlIbk5KREJvek1iUHl0R2c9PSIsInZhbHVlIjoidnJwSEpXZGRQdEMzRkZwNG4xZ1wvQ0k5VEtCeWE5UnozakRTR3FEZXp4dmZtYVNcLzZPOHN4ZEN0MGsrYUt5dXNQIiwibWFjIjoiMjUwNDBkZTBjMGZhMmNkZWRhNjRiNzMwNzUwYmNiZTRlMjBiMTdlM2E1MWQ1N2Q1ZTEyNmU2YmRhMzYwOTcyYyJ9; agentemotor_session=eyJpdiI6ImU2QjJuTzNkOGJlN2FjMFdGakxzOHc9PSIsInZhbHVlIjoiK3VMS3V6SWhHMWZudDRoUW1COWNVMXR2eFBVY0pvY1Z5Y1UzdW03XC9oRmJRT2d0UFBDM1JzSWlVUVc2dkxYOW8iLCJtYWMiOiIyZTI5YjM1Y2I1YmI3NTA1MjM5OGY5NjM5NjY0YjdjODgyYjMwMGRiYjkzZjE4ODkyZDliMjk3MmFiMmYwYzhhIn0%3D"
     );
 
     var raw = JSON.stringify({
       name: "event-insurable-object-by-ref",
-      data: { vehicle: { line: refData.line, code: "0" } },
+      data: {
+        vehicle: {
+          line: refData.line,
+          brand: refData.brand,
+          model: parseInt(refData.model),
+        },
+      },
       timestamp: "30072020",
       origin: "postman",
     });
@@ -30,13 +36,18 @@ export const getVehicleDataByRef = createAsyncThunk(
   }
 );
 
+const initialState = {
+  vehicleByRef: {
+    status: "",
+    data: {},
+  },
+};
+
 const referenceDataSlice = createSlice({
   name: "referenceData",
-  initialState: {
-    vehicleByRef: {
-      status: "",
-      data: {},
-    },
+  initialState,
+  reducers: {
+    resetState: (state) => initialState,
   },
   //Handling API response
   extraReducers: {
@@ -44,6 +55,7 @@ const referenceDataSlice = createSlice({
       state.vehicleByRef.status = "loading";
     },
     [getVehicleDataByRef.fulfilled]: (state, action) => {
+      console.log(action.payload);
       state.vehicleByRef.data = action.payload;
       state.vehicleByRef.status = "success";
     },
@@ -52,6 +64,8 @@ const referenceDataSlice = createSlice({
     },
   },
 });
+
+export const { resetState } = referenceDataSlice.actions;
 
 //API response data state val
 export const selectRefResponse = (state) => state.referenceData.vehicleByRef;

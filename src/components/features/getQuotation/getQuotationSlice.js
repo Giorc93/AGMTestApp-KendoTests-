@@ -26,13 +26,18 @@ export const getQuotation = createAsyncThunk(
   }
 );
 
+const initialState = {
+  quotationData: {
+    data: [],
+    status: "",
+  },
+};
+
 const getQuotationSlice = createSlice({
   name: "getQuotation",
-  initialState: {
-    quotationData: {
-      data: [],
-      status: "",
-    },
+  initialState,
+  reducers: {
+    resetState: (state) => initialState,
   },
   extraReducers: {
     [getQuotation.pending]: (state, action) => {
@@ -48,6 +53,8 @@ const getQuotationSlice = createSlice({
     },
   },
 });
+
+export const { resetState } = getQuotationSlice.actions;
 
 //Exp. state value (useSelector)
 export const selectQuotation = (state) => state.quotationData.quotationData;

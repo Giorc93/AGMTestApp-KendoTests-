@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 //API Req. using test token
-export const getPlaceListByString = createAsyncThunk(
-  "place/getPlaceListByString",
+export const getBrandsList = createAsyncThunk(
+  "place/getBrandsList",
   async () => {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -14,12 +14,10 @@ export const getPlaceListByString = createAsyncThunk(
     );
 
     var raw = JSON.stringify({
-      name: "event-ubication-get-list-place",
-      timestamp: "dog",
+      name: "event-insurable-get-list-brands",
+      data: { vehicle: { code: "0" } },
+      timestamp: "30072020",
       origin: "api.consume",
-      //TODO: Set "alls" as def. value on async() fn. city_name: placeStr
-      //"alls" str loads the entire places obj.
-      data: { city_name: "alls" },
     });
 
     var requestOptions = {
@@ -30,42 +28,43 @@ export const getPlaceListByString = createAsyncThunk(
     };
 
     return await fetch(
-      "http://api.app.agentemotor.com/insurances/ubication/actions/get",
+      "http://api.app.agentemotor.com/insurances/insuranceobject/actions/get",
       requestOptions
     ).then((response) => response.json());
   }
 );
 
 const initialState = {
-  placeResponseData: {
+  brandsResponseData: {
     data: [],
     status: "",
   },
 };
 
-const getPlaceListSlice = createSlice({
-  name: "getPlaceList",
+const getBrandsListSlice = createSlice({
+  name: "getBrandsList",
   initialState,
   reducers: {
     resetState: (state) => initialState,
   },
   extraReducers: {
-    [getPlaceListByString.pending]: (state, action) => {
-      state.placeResponseData.status = "loading";
+    [getBrandsList.pending]: (state, action) => {
+      state.brandsResponseData.status = "loading";
     },
-    [getPlaceListByString.fulfilled]: (state, action) => {
-      state.placeResponseData.data = action.payload;
-      state.placeResponseData.status = "success";
+    [getBrandsList.fulfilled]: (state, action) => {
+      state.brandsResponseData.data = action.payload;
+      state.brandsResponseData.status = "success";
     },
-    [getPlaceListByString.rejected]: (state, action) => {
-      state.placeResponseData.status = "failed";
+    [getBrandsList.rejected]: (state, action) => {
+      state.brandsResponseData.status = "failed";
     },
   },
 });
 
-export const { resetState } = getPlaceListSlice.actions;
+export const { resetState } = getBrandsListSlice.actions;
 
 //Exp. state value (useSelector)
-export const selectPlaceResponse = (state) => state.placeData.placeResponseData;
+export const selectBrandsResponse = (state) =>
+  state.brandsData.brandsResponseData;
 
-export default getPlaceListSlice.reducer;
+export default getBrandsListSlice.reducer;

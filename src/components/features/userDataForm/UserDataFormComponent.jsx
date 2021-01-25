@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 //TODO: Check forwardRef
 import { Grid, Typography, Button } from "@material-ui/core";
-import { withRouter, useHistory } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -16,7 +16,7 @@ import { idTypeArr, genderArr } from "../../utils/inputArrays";
 import { yupSchema } from "./userDataUtils";
 
 import MainContainer from "../../material/MainContainer";
-import AutocompleteC from "../../material/AutocompleteC";
+import CitiesAutocomplete from "../../material/CitiesAutocomplete";
 import SelectInput from "../../material/SelectInput";
 import RadioButton from "../../material/RadioButton";
 import DatePicker from "../../material/DatePicker";
@@ -31,15 +31,14 @@ const UserDataFormComponent = () => {
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
-  const placeData = useSelector(selectPlaceResponse);
-
-  //Validate Response status
-  const dispatch = useDispatch();
-  const history = useHistory();
 
   useEffect(() => {
     dispatch(getPlaceListByString());
   }, []);
+
+  const placeData = useSelector(selectPlaceResponse);
+
+  const dispatch = useDispatch();
 
   //Exec. placeData fn to load full place obj.
   const handlePlaceChange = (placeData) => {
@@ -48,7 +47,6 @@ const UserDataFormComponent = () => {
 
   const onSubmit = (data) => {
     dispatch(saveUserData(data));
-    history.push("/vehicleByPlateResult");
     //console.log(data);
   };
   return (
@@ -135,7 +133,7 @@ const UserDataFormComponent = () => {
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <AutocompleteC
+            <CitiesAutocomplete
               name="placeData"
               label="Ciudad"
               //Sending place fn as prop to save entire placeData obj
