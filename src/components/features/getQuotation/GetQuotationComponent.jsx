@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-import { withRouter, useHistory } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, makeStyles } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
 import { selectPlateResponse } from "../plateSearch/plateDataSlice";
 import { selectUserData } from "../userDataForm/userDataSlice";
@@ -10,21 +10,13 @@ import { getQuotation } from "./getQuotationSlice";
 
 import MainContainer from "../../material/MainContainer";
 
-const useStyles = makeStyles((theme) => ({}));
-
 const GetQuotationComponent = () => {
-  const history = useHistory();
   const dispatch = useDispatch();
-  const styles = useStyles();
 
   const getQuot = () => {
     dispatch(getQuotation(quotationData));
     console.log(userData.placeData.city);
   };
-
-  useEffect(() => {
-    console.log(plateResponseData.plate + "-" + plateResponseData.code);
-  }, []);
 
   const userDataSelector = useSelector(selectUserData);
   const userData = userDataSelector.userData;

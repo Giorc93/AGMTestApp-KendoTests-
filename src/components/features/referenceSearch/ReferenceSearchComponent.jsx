@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 //TODO: Add yup Schema
-import { useDispatch, useSelector } from "react-redux";
 import { Grid, Button } from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -17,21 +17,22 @@ import Input from "../../material/Input";
 import Form from "../../material/Form";
 
 const ReferenceSearchComponent = () => {
-  useEffect(() => {
-    dispatch(getBrandsList());
-
-    return dispatch(resetState());
-  }, []);
+  const dispatch = useDispatch();
 
   const brandsData = useSelector(selectBrandsResponse);
 
-  const dispatch = useDispatch();
-
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit /*errors*/ } = useForm();
 
   const onSubmit = (data) => {
     dispatch(getVehicleDataByRef(data));
   };
+
+  useEffect(() => {
+    dispatch(getBrandsList());
+
+    return dispatch(resetState());
+  }, [dispatch]);
+
   return (
     <>
       <Form onSubmit={handleSubmit(onSubmit)}>

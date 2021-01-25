@@ -62,7 +62,7 @@ const CardC = (props) => {
             {props.vehData.type}
           </Typography>
           <Typography variant="subtitle2">
-            Código: {props.vehData.code}
+            Código Fasecolda: {props.vehData.code}
           </Typography>
           <Divider className={styles.dividerMargin} />
           <Grid container spacing={1}>

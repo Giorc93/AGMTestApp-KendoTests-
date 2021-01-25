@@ -32,10 +32,6 @@ const UserDataFormComponent = () => {
     resolver: yupResolver(schema),
   });
 
-  useEffect(() => {
-    dispatch(getPlaceListByString());
-  }, []);
-
   const placeData = useSelector(selectPlaceResponse);
 
   const dispatch = useDispatch();
@@ -49,6 +45,11 @@ const UserDataFormComponent = () => {
     dispatch(saveUserData(data));
     //console.log(data);
   };
+
+  useEffect(() => {
+    dispatch(getPlaceListByString());
+  }, [dispatch]);
+
   return (
     <MainContainer>
       <SubHeader>Información Personal</SubHeader>

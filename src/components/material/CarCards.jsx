@@ -13,8 +13,16 @@ const CarCards = () => {
     <Grid container spacing={2}>
       {refResponseData.length > 0 &&
         refResponseData.map((element, i) => (
-          <Grid container item xs={12} md={6} lg={4} justify="center">
-            <CardC key={element.vehicle.code} vehData={element.vehicle} />
+          <Grid
+            container
+            item
+            xs={12}
+            md={6}
+            lg={4}
+            justify="center"
+            key={element.vehicle.code}
+          >
+            <CardC vehData={element.vehicle} />
           </Grid>
         ))}
     </Grid>

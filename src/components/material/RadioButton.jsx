@@ -2,17 +2,9 @@ import React from "react";
 
 import { Controller } from "react-hook-form";
 
-import {
-  makeStyles,
-  FormControlLabel,
-  RadioGroup,
-  Radio,
-} from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({}));
+import { FormControlLabel, RadioGroup, Radio } from "@material-ui/core";
 
 const RadioButton = (props) => {
-  const styles = useStyles();
   return (
     <div>
       <label>Género</label>

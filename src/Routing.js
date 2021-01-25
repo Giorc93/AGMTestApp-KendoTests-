@@ -7,14 +7,12 @@ import UserDataFormComponent from "./components/features/userDataForm/UserDataFo
 import GetQuotationComponent from "./components/features/getQuotation/GetQuotationComponent";
 import ErrorComponent from "./components/features/error/ErrorComponent";
 import HomeComponent from "./components/features/home/HomeComponent";
-import TestComponent from "./components/features/test/TestComponent";
 
 const Routing = () => {
   return (
     <Switch>
       <Route exact path="/" component={HomeComponent} />
       <Route exact path="/home" component={HomeComponent} />
-      <Route exact path="/test" component={TestComponent} />
       <Route exact path="/userDataForm" component={UserDataFormComponent} />
       <Route exact path="/vehicleSearch" component={VehicleSearchComponent} />
       <Route exact path="/getQuotation" component={GetQuotationComponent} />
