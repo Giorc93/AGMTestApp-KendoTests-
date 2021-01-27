@@ -14,7 +14,7 @@ const ErrorComponent = () => {
   return (
     <MainContainer>
       <Alert severity="error">
-        <AlertTitle>Oops! </AlertTitle>
+        <AlertTitle>¡Oops! </AlertTitle>
         Parece que la página que buscas no existe —{" "}
         <Link
           onClick={() => history.push("/")}
@@ -22,7 +22,7 @@ const ErrorComponent = () => {
           underline="none"
           variant="body2"
         >
-          <strong>Llévame al inicio</strong>
+          <strong>Volver al inicio</strong>
         </Link>
       </Alert>
     </MainContainer>

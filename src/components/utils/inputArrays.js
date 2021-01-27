@@ -21,9 +21,10 @@ export const riskTypeArr = [
 
 export const plateTypeArr = [
   { value: "particular", label: "Particular" },
-  { value: "publico", label: "Público" },
+  { value: "publico", label: "Público" }, //TODO: Conditional fields
   { value: "diplomatico", label: "Diplomático" },
 ];
+
 //TODO: Check label values
 export const vehicleUseTypeArr = [
   { value: "particular", label: "Particular" },
@@ -57,7 +58,7 @@ export const vehicleUseTypeArr = [
 ];
 
 export const protectionTypeArr = [
-  { value: "ALARMA", label: "Alarma" },
+  { value: "ALARMA", label: "Alarma" }, //TODO: Alarma by default
   { value: "GPS", label: "GPS" },
   { value: "NINGUNO", label: "Ninguno" },
 ];
@@ -119,7 +120,7 @@ export const educationLevel = [
 ];
 
 export const maritalStatusArr = [
-  { value: "single", label: "Soltero/a" },
+  { value: "single", label: "Soltero/a" }, //TODO: "single" by default
   { value: "married", label: "Casado/a" },
   { value: "separated", label: "Separado/a" },
   { value: "widowed", label: "Viudo/a" },

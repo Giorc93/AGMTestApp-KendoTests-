@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import VehicleByPlateResultComponent from "./components/features/vehicleByPlateResult/VehicleByPlateResultComponent";
+import DocumentDataFormComponent from "./components/features/documentDataForm/DocumentDataFormComponent";
 import VehicleSearchComponent from "./components/features/vehicleSearch/VehicleSearchComponent";
 import UserDataFormComponent from "./components/features/userDataForm/UserDataFormComponent";
 import GetQuotationComponent from "./components/features/getQuotation/GetQuotationComponent";
@@ -14,8 +15,13 @@ const Routing = () => {
       <Route exact path="/" component={HomeComponent} />
       <Route exact path="/home" component={HomeComponent} />
       <Route exact path="/userDataForm" component={UserDataFormComponent} />
-      <Route exact path="/vehicleSearch" component={VehicleSearchComponent} />
       <Route exact path="/getQuotation" component={GetQuotationComponent} />
+      <Route exact path="/vehicleSearch" component={VehicleSearchComponent} />
+      <Route
+        exact
+        path="/documentDataForm"
+        component={DocumentDataFormComponent}
+      />
 
       <Route
         exact

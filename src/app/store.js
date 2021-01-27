@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 //importing Reducers
+import getReferencesListReducer from "../components/features/getReferencesList/getReferencesListSlice";
 import referenceDataReducer from "../components/features/referenceSearch/referenceDataSlice";
 import getBrandsListReducer from "../components/features/getBrandsList/getBrandsListSlice";
 import getQuotationReducer from "../components/features/getQuotation/getQuotationSlice";
@@ -10,6 +11,7 @@ import userDataReducer from "../components/features/userDataForm/userDataSlice";
 
 export default configureStore({
   reducer: {
+    referencesListData: getReferencesListReducer,
     referenceData: referenceDataReducer,
     quotationData: getQuotationReducer,
     brandsData: getBrandsListReducer,

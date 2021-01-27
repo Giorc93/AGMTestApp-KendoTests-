@@ -48,7 +48,7 @@ const plateDataSlice = createSlice({
         plateNumber: action.payload.plateNumber,
       };
     },
-    resetState: (state) => initialState,
+    resetPlateDataState: (state) => initialState,
   },
   //Handling API response
   extraReducers: {
@@ -66,7 +66,7 @@ const plateDataSlice = createSlice({
 });
 
 //Exp. actions
-export const { savePlateNumber, resetState } = plateDataSlice.actions;
+export const { savePlateNumber, resetPlateDataState } = plateDataSlice.actions;
 
 //PlateData state val
 export const selectPlateData = (state) => state.plateData.plateData;

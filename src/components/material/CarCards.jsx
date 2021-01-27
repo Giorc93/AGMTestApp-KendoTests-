@@ -22,7 +22,7 @@ const CarCards = () => {
             justify="center"
             key={element.vehicle.code}
           >
-            <CardC vehData={element.vehicle} />
+            <CardC vehData={element.vehicle} origin="refSearch" />
           </Grid>
         ))}
     </Grid>

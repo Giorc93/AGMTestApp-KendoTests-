@@ -47,7 +47,7 @@ const getPlaceListSlice = createSlice({
   name: "getPlaceList",
   initialState,
   reducers: {
-    resetState: (state) => initialState,
+    resetPlaceListState: (state) => initialState,
   },
   extraReducers: {
     [getPlaceListByString.pending]: (state, action) => {
@@ -63,7 +63,7 @@ const getPlaceListSlice = createSlice({
   },
 });
 
-export const { resetState } = getPlaceListSlice.actions;
+export const { resetPlaceListState } = getPlaceListSlice.actions;
 
 //Exp. state value (useSelector)
 export const selectPlaceResponse = (state) => state.placeData.placeResponseData;

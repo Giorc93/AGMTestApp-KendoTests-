@@ -24,7 +24,7 @@ export const userDataSlice = createSlice({
         phoneNumber: action.payload.phoneNumber,
         placeData: state.userData.placeData,
         idType: action.payload.idType,
-        idNumber: action.payload.idNumber,
+        idNumber: action.payload.idNumber || action.payload.nitNumber,
         gender: action.payload.gender,
       };
     },
@@ -33,12 +33,16 @@ export const userDataSlice = createSlice({
         placeData: action.payload,
       };
     },
-    resetState: (state) => initialState,
+    resetUserDataState: (state) => initialState,
   },
 });
 
 //Exp. actions
-export const { saveUserData, savePlaceData } = userDataSlice.actions;
+export const {
+  saveUserData,
+  savePlaceData,
+  resetUserDataState,
+} = userDataSlice.actions;
 //Exp. selectors
 export const selectUserData = (state) => state.userData;
 

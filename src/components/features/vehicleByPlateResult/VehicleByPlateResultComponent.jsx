@@ -28,7 +28,6 @@ const VehicleByPlateResult = () => {
   const plateResponse = useSelector(selectPlateResponse);
   const vehicleData =
     plateResponse.data.length > 0 ? plateResponse.data[0].vehicle : undefined;
-  console.log(vehicleData);
 
   return (
     <MainContainer>
@@ -39,8 +38,7 @@ const VehicleByPlateResult = () => {
             Cargando Información
             <CircularProgress className={styles.circProg} size={16} />
           </AlertTitle>
-          Estamos recuperando la información del vehiculo —{" "}
-          <strong>Modificar número de placa</strong>
+          Estamos recuperando la información del vehiculo
         </Alert>
       )}
       {plateResponse.status === "success" && (
@@ -52,7 +50,9 @@ const VehicleByPlateResult = () => {
               suministrada — <strong>Revisa el número de placa</strong>
             </Alert>
           )}
-          {vehicleData !== undefined && <CardC vehData={vehicleData} />}
+          {vehicleData !== undefined && (
+            <CardC vehData={vehicleData} origin="plateSearch" />
+          )}
         </Fragment>
       )}
       {plateResponse.status === "failed" && (

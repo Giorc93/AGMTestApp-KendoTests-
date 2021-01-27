@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 //TODO: Check forwardRef
 import { Grid, Typography, Button } from "@material-ui/core";
-import { withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { withRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
@@ -15,8 +15,8 @@ import { saveUserData, savePlaceData } from "./userDataSlice";
 import { idTypeArr, genderArr } from "../../utils/inputArrays";
 import { yupSchema } from "./userDataUtils";
 
-import MainContainer from "../../material/MainContainer";
 import CitiesAutocomplete from "../../material/CitiesAutocomplete";
+import MainContainer from "../../material/MainContainer";
 import SelectInput from "../../material/SelectInput";
 import RadioButton from "../../material/RadioButton";
 import DatePicker from "../../material/DatePicker";
@@ -136,7 +136,7 @@ const UserDataFormComponent = () => {
           <Grid item xs={12} md={6}>
             <CitiesAutocomplete
               name="placeData"
-              label="Ciudad"
+              label="Ciudad de Circulación"
               //Sending place fn as prop to save entire placeData obj
               regPlaceData={handlePlaceChange}
               //Using register to handle input validation only

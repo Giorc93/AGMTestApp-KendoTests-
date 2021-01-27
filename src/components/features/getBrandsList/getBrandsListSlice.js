@@ -4,9 +4,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const getBrandsList = createAsyncThunk(
   "place/getBrandsList",
   async () => {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append(
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append(
       "Cookie",
       //TODO: Test using consultant account.
       //Test token
@@ -22,7 +22,7 @@ export const getBrandsList = createAsyncThunk(
 
     var requestOptions = {
       method: "POST",
-      headers: myHeaders,
+      headers,
       body: raw,
       redirect: "follow",
     };
@@ -45,7 +45,7 @@ const getBrandsListSlice = createSlice({
   name: "getBrandsList",
   initialState,
   reducers: {
-    resetState: (state) => initialState,
+    resetBrandsDataState: (state) => initialState,
   },
   extraReducers: {
     [getBrandsList.pending]: (state, action) => {
@@ -61,7 +61,7 @@ const getBrandsListSlice = createSlice({
   },
 });
 
-export const { resetState } = getBrandsListSlice.actions;
+export const { resetBrandsDataState } = getBrandsListSlice.actions;
 
 //Exp. state value (useSelector)
 export const selectBrandsResponse = (state) =>

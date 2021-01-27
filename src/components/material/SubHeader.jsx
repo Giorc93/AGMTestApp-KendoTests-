@@ -5,7 +5,8 @@ import { Typography, makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     textAlign: "center",
-    fontSize: "32px",
+    fontSize: 32,
+    marginBottom: theme.spacing(2),
   },
 }));
 

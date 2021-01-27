@@ -37,7 +37,7 @@ const getQuotationSlice = createSlice({
   name: "getQuotation",
   initialState,
   reducers: {
-    resetState: (state) => initialState,
+    resetQuotationState: (state) => initialState,
   },
   extraReducers: {
     [getQuotation.pending]: (state, action) => {
@@ -54,7 +54,7 @@ const getQuotationSlice = createSlice({
   },
 });
 
-export const { resetState } = getQuotationSlice.actions;
+export const { resetQuotationState } = getQuotationSlice.actions;
 
 //Exp. state value (useSelector)
 export const selectQuotation = (state) => state.quotationData.quotationData;

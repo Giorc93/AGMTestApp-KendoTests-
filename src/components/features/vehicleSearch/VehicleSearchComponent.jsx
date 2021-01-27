@@ -11,6 +11,7 @@ import {
   CardActions,
   Button,
   makeStyles,
+  Typography,
 } from "@material-ui/core";
 import MainContainer from "../../material/MainContainer";
 import SubHeader from "../../material/SubHeader";
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   dividerMargin: {
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(1),
   },
   btnStyle: {
     margin: "0 auto",
@@ -30,12 +31,18 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     flexGrow: 1,
   },
+  textCenter: {
+    textAlign: "center",
+  },
 }));
 
 const VehicleSearchComponent = () => {
   const [toggler, setToggler] = useState(true);
   const styles = useStyles();
-  var title = toggler ? "Consulta por Placa" : "Consultar por Referencia";
+  var title = toggler ? "CONSULTA POR PLACA" : "CONSULTA POR REFERENCIA";
+  var subtitle = toggler
+    ? "Si no conoces el número de placa puedes intentar una busqueda por referencia"
+    : "Si conoces el número de placa puedes realizar tu consulta por placa";
 
   const handleToggle = () => {
     setToggler(!toggler);
@@ -53,6 +60,19 @@ const VehicleSearchComponent = () => {
         />
         <CardContent>
           <SubHeader>{title}</SubHeader>
+          <Typography variant="body2" className={styles.textCenter}>
+            {subtitle}
+          </Typography>
+          <CardActions>
+            <Button
+              onClick={handleToggle}
+              className={styles.btnStyle}
+              variant="text"
+              color="primary"
+            >
+              {toggler ? "Consultar por Referencia" : "Consultar por Placa"}
+            </Button>
+          </CardActions>
           <Divider className={styles.dividerMargin} />
           <Grid container justify="center">
             <Grid item xs={12}>
@@ -61,16 +81,6 @@ const VehicleSearchComponent = () => {
             </Grid>
           </Grid>
         </CardContent>
-        <CardActions>
-          <Button
-            onClick={handleToggle}
-            className={styles.btnStyle}
-            variant="outlined"
-            color="primary"
-          >
-            {toggler ? "Consultar por Referencia" : "Consultar por Placa"}
-          </Button>
-        </CardActions>
       </Card>
     </MainContainer>
   );

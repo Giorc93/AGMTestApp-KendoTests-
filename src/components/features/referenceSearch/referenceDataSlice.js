@@ -37,6 +37,7 @@ export const getVehicleDataByRef = createAsyncThunk(
 );
 
 const initialState = {
+  selVehicleData: {},
   vehicleByRef: {
     status: "",
     data: {},
@@ -47,7 +48,12 @@ const referenceDataSlice = createSlice({
   name: "referenceData",
   initialState,
   reducers: {
-    resetState: (state) => initialState,
+    resetVehicleDataState: (state) => {
+      state.vehicleByRef = initialState.vehicleByRef;
+    },
+    saveVehicleData: (state, action) => {
+      state.selVehicleData = action.payload;
+    },
   },
   //Handling API response
   extraReducers: {
@@ -55,7 +61,6 @@ const referenceDataSlice = createSlice({
       state.vehicleByRef.status = "loading";
     },
     [getVehicleDataByRef.fulfilled]: (state, action) => {
-      console.log(action.payload);
       state.vehicleByRef.data = action.payload;
       state.vehicleByRef.status = "success";
     },
@@ -65,9 +70,13 @@ const referenceDataSlice = createSlice({
   },
 });
 
-export const { resetState } = referenceDataSlice.actions;
+export const {
+  saveVehicleData,
+  resetVehicleDataState,
+} = referenceDataSlice.actions;
 
 //API response data state val
 export const selectRefResponse = (state) => state.referenceData.vehicleByRef;
+export const selectVehicleData = (state) => state.referenceData.selVehicleData;
 
 export default referenceDataSlice.reducer;

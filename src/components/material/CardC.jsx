@@ -1,5 +1,6 @@
 import React from "react";
 // Car Result Card Component
+
 import {
   Button,
   Card,
@@ -13,6 +14,9 @@ import {
   Grid,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { saveVehicleData } from "../features/referenceSearch/referenceDataSlice";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,18 +37,27 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
     marginTop: theme.spacing(2),
   },
-  buttonsF: {
+  buttonsFlex: {
     flexGrow: 1,
   },
 }));
 
 const CardC = (props) => {
+  const dispatch = useDispatch();
+
   const history = useHistory();
+
   const styles = useStyles();
+
   const refValue = new Intl.NumberFormat("es-CO", {
     style: "currency",
     currency: "COP",
   }).format(props.vehData.vehicle_risk.reference_price);
+
+  const selectVehicle = () => {
+    dispatch(saveVehicleData(props.vehData));
+    history.push("/documentDataForm");
+  };
 
   return (
     <Card className={styles.root} variant="outlined">
@@ -122,21 +135,23 @@ const CardC = (props) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
+        {props.origin === "plateSearch" && (
+          <Button
+            className={styles.buttonsFlex}
+            variant="contained"
+            size="medium"
+            color="default"
+            onClick={() => history.push("/vehicleSearch")}
+          >
+            No es mi vehiculo
+          </Button>
+        )}
         <Button
-          className={styles.buttonsF}
+          className={styles.buttonsFlex}
           variant="contained"
-          size="small"
-          color="default"
-          onClick={() => history.push("/ecf")}
-        >
-          No es mi vehiculo
-        </Button>
-        <Button
-          className={styles.buttonsF}
-          variant="contained"
-          size="small"
+          size="medium"
           color="primary"
-          onClick={() => history.push("/getQuotation")}
+          onClick={() => selectVehicle()}
         >
           ¡Es mi vehiculo!
         </Button>
