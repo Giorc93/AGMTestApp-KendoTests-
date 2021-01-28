@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
 import { Controller } from "react-hook-form";
 
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SelectInput = (props) => {
+const SelectInput = forwardRef((props, ref) => {
   const styles = useStyles();
   return (
     <FormControl variant="outlined" fullWidth className={styles.root}>
@@ -25,6 +25,7 @@ const SelectInput = (props) => {
       <Controller
         control={props.control}
         name={props.name}
+        defaultValue={props.defaultValue}
         as={
           <Select label={props.label}>
             {props.options.map((option, i) => (
@@ -37,6 +38,6 @@ const SelectInput = (props) => {
       />
     </FormControl>
   );
-};
+});
 
 export default SelectInput;

@@ -34,7 +34,7 @@ const PlateSearchComponent = () => {
   const onSubmit = (data) => {
     dispatch(savePlateNumber(data));
     dispatch(getVehicleDataByPlate(data.plateNumber));
-    history.push("/vehicleByPlateResult");
+    history.push("/documentDataForm");
   };
 
   return (

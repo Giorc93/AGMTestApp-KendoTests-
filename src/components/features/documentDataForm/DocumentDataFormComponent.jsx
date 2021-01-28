@@ -1,15 +1,12 @@
 import React from "react";
-//TODO: Check forwardRef
+//TODO: Check validations
 import { Grid, Typography, Button } from "@material-ui/core";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { withRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import * as yup from "yup";
 
-import { saveUserData } from "../userDataForm/userDataSlice";
+import { saveDocumentData } from "../userDataForm/userDataSlice";
 import { idTypeArr } from "../../utils/inputArrays";
-import { yupSchema } from "./documentDataUtils";
 
 import MainContainer from "../../material/MainContainer";
 import SelectInput from "../../material/SelectInput";
@@ -17,21 +14,26 @@ import SubHeader from "../../material/SubHeader";
 import Input from "../../material/Input";
 import Form from "../../material/Form";
 
-const schema = yup.object().shape(yupSchema);
-
 const DocumentDataFormComponent = () => {
-  const { register, watch, handleSubmit, errors, control } = useForm({
-    mode: "onBlur",
-    resolver: yupResolver(schema),
-  });
+  const { register, watch, handleSubmit, errors, control } = useForm();
 
   const watchIdType = watch("idType", "CC");
+
+  const helperText = (type) => {
+    switch (type) {
+      case "required":
+        return "Campo requerido";
+      case "pattern":
+        return "Formato inválido";
+      default:
+        return null;
+    }
+  };
 
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    console.log("sss");
-    dispatch(saveUserData(data));
+    dispatch(saveDocumentData(data));
   };
 
   return (
@@ -47,10 +49,15 @@ const DocumentDataFormComponent = () => {
               options={idTypeArr}
               name="idType"
               control={control}
-              ref={register}
+              ref={register({ pattern: /^(^[A-Za-z]*)$/, required: true })}
+              defaultValue={"CC"}
               label="Tipo de Documento"
               error={!!errors.idType}
-              helperText={errors?.idType?.message}
+              helperText={
+                errors.idType &&
+                errors.idType.type === "required" &&
+                "Selecciona el tipo de documento"
+              }
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -61,9 +68,11 @@ const DocumentDataFormComponent = () => {
                 label="Número de NIT"
                 name="nitNumber"
                 control={control}
-                ref={register}
+                ref={register({ pattern: /^(^[0-9]*-[0-9])$/, required: true })}
                 error={!!errors.nitNumber}
-                helperText={errors?.nitNumber?.message}
+                helperText={
+                  errors.nitNumber && helperText(errors.nitNumber.type)
+                }
               />
             )}
             {watchIdType !== "NIT" && (
@@ -73,22 +82,20 @@ const DocumentDataFormComponent = () => {
                 label="Número de Documento"
                 name="idNumber"
                 control={control}
-                ref={register}
+                ref={register({ pattern: /^(^[0-9]*)$/, required: true })}
                 error={!!errors.idNumber}
-                helperText={errors?.idNumber?.message}
+                helperText={errors.idNumber && helperText(errors.idNumber.type)}
               />
             )}
           </Grid>
           <Grid container item xs={12} justify="center">
             <Button
               type="submit"
-              //TODO: Set disabled as true by default
-              disabled={Object.keys(errors).length === 0 ? false : true}
               variant="contained"
               color="primary"
               size="large"
             >
-              Consultar
+              Continuar
             </Button>
           </Grid>
         </Grid>
