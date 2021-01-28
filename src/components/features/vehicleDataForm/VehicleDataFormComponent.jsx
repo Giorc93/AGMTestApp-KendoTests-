@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-//TODO: Check forwardRef
+
 import { Grid, Typography, Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,12 +11,12 @@ import {
   getPlaceListByString,
   selectPlaceResponse,
 } from "../getPlaceList/getPlaceListSlice";
-import { saveUserData, savePlaceData } from "./userDataSlice";
-import { genderArr } from "../../utils/inputArrays";
+import { saveVehicleData, savePlaceData } from "./vehicleDataSlice";
 import { yupSchema } from "./userDataUtils";
 
 import CitiesAutocomplete from "../../material/CitiesAutocomplete";
 import MainContainer from "../../material/MainContainer";
+import SelectInput from "../../material/SelectInput";
 import RadioButton from "../../material/RadioButton";
 import DatePicker from "../../material/DatePicker";
 import SubHeader from "../../material/SubHeader";
@@ -25,7 +25,7 @@ import Form from "../../material/Form";
 
 const schema = yup.object().shape(yupSchema);
 
-const UserDataFormComponent = () => {
+const vehicleDataFormComponent = () => {
   const { register, handleSubmit, errors, control } = useForm({
     mode: "onBlur",
     resolver: yupResolver(schema),
@@ -140,13 +140,4 @@ const UserDataFormComponent = () => {
   );
 };
 
-export default withRouter(UserDataFormComponent);
-
-/*
-<SelectInput
-              options={idTypeArr}
-              name="idType"
-              ref={register}
-              label="Tipo de Documento"
-            />
-*/
+export default withRouter(vehicleDataFormComponent);

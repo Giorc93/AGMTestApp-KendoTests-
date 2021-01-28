@@ -26,12 +26,6 @@ export const userDataSlice = createSlice({
         gender: action.payload.gender,
       };
     },
-    saveDocumentData: (state, action) => {
-      state.userData = {
-        idType: action.payload.idType,
-        idNumber: action.payload.idNumber || action.payload.nitNumber,
-      };
-    },
     savePlaceData: (state, action) => {
       state.userData = {
         placeData: action.payload,
@@ -45,7 +39,6 @@ export const userDataSlice = createSlice({
 export const {
   saveUserData,
   savePlaceData,
-  saveDocumentData,
   resetUserDataState,
 } = userDataSlice.actions;
 //Exp. selectors
