@@ -2,13 +2,10 @@ import React from "react";
 
 import { withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Button } from "@material-ui/core";
 
 import { selectPlateResponse } from "../plateSearch/plateDataSlice";
 import { selectUserData } from "../userDataForm/userDataSlice";
 import { getQuotation } from "./getQuotationSlice";
-
-import MainContainer from "../../material/MainContainer";
 
 const GetQuotationComponent = () => {
   const dispatch = useDispatch();
@@ -111,102 +108,7 @@ const GetQuotationComponent = () => {
     origin: "postman",
   };
 
-  return (
-    <MainContainer>
-      <Button onClick={() => getQuot()}>Obtener Cotizacion</Button>
-    </MainContainer>
-  );
+  return <></>;
 };
 
 export default withRouter(GetQuotationComponent);
-
-/*
-    version: "1",
-    data: {
-      insurable_objects: [
-        {
-          //data / storeState / dataType
-          identification:
-            plateResponseData.plate + "-" + plateResponseData.code, //"plateNumber-fasecolda" / plateReponse / String
-          price_sugested: plateResponseData.vehicle_risk.reference_price + "", //"sugestedprice" / plateResponse / String
-          tag: plateResponseData.plate, //"plateNumber" / plateSearch / String
-          vehicle: {
-            brand: plateResponseData.brand, //"brand" / plateResponse / String
-            //"{code:"fasecolda" / plateResponse / String , fuel: "*", / TODO: ? Form / String, nationality: "*" / TODO: form / String  }"
-            codification: {
-              code: plateResponseData.code,
-              fuel: "*",
-              nationality: "*",
-            },
-            cylinder: plateResponseData.cylinder, //"cyllinder" /plateResponse / String
-            line: plateResponseData.line, //"line" / plateResponse / String
-            model: plateResponseData.model, //"model" / plateResponse / Number
-            number_passengers: plateResponseData.number_passengers, //"passangersNumber" / plateResponse / Number
-            plate: plateResponseData.plate, //"plateNumber" / plateSearch / String
-            type: plateResponseData.type, //"vehcleType" / plateResponse / String
-            vehicle_risk: {
-              accesories_price: 0, //"accesoriesPrice" / TODO: ? Form / Number
-              in_agency: false, //"inAgency" / TODO: ? Form / Boolean
-              plate_type: plateResponseData.vehicle_risk.plate_type, //"plateType" / plateResponse / String
-              protection_type: "", //"proetectionType" / TODO: ? Form / String
-              reference_price: plateResponseData.vehicle_risk.reference_price, //"sugestedPrice" / plateResponse / Number
-              use_type: "particular", //"useType" / TODO: ? Form / String
-            },
-            weight: 0, //"weight" / Optional / Number
-          },
-        },
-      ],
-      parties: [
-        {
-          party_rol: "Asegurado", //"partyRol" / TODO: ? Form / String
-          person: {
-            birht_date: userData.birthDate, //"birthDate" / userData / String
-            contact_data: [
-              {
-                contact_info: {
-                  email: userData.email, //"email" / userData / String
-                  ubication: {
-                    address_line1: "Calle 15 # 15-16", //"addressLine" / TODO: ? Form / String
-                    place: {
-                      //"{placeData}" / placeResponse / Obj
-                      city_code: userData.placeData.city_code,
-                      city_name: userData.placeData.city_name,
-                      country_code: userData.placeData.country_code,
-                      country_name: userData.placeData.country_name,
-                      state_code: userData.placeData.state_code,
-                      state_name: userData.placeData.state_name,
-                    },
-                    postal_code: userData.placeData.code, //"postalCode" /  => conCatData* / Sring
-                  },
-                },
-                contact_tag: "Email", //Default Val / Verify data with API resp.
-              },
-            ],
-            educational_level: "primary", //"educartionLevel" / TODO: ? Form / String
-            firstname: userData.firstName, //"firstName" / userData / String
-            gender: userData.gender, //"gender" / +userData / String
-            identification_number: userData.idNumber, //"idNumber" / userData / String
-            identification_type: userData.idType, //"idType" / +userData / String
-            lastname: userData.lastName, //"lastName" / +userData / String
-            marital_status: "single", //"maritalStatus" / +userData / String
-            profession: "Comerciante", //"profession" / +userData / String
-          },
-        },
-      ],
-      type: "all_risk_vehicle", //"riskType" / default / String
-      ubication: {
-        address_line1: "Calle 15 # 15-16", //"addressLine" / TODO: ? Form / String
-        place: {
-          //"{placeData}" / placeResponse / Obj
-          city_code: userData.placeData.city_code,
-          city_name: userData.placeData.city_name,
-          country_code: userData.placeData.country_code,
-          country_name: userData.placeData.country_name,
-          state_code: userData.placeData.state_code,
-          state_name: userData.placeData.state_name,
-        },
-        postal_code: userData.placeData.code, //"postalCode" /  => conCatData* / Sring
-      },
-    },
-    name: "event-create-quote", // defaultEventName
-    origin: "postman", // default / api.consume ? */

@@ -1,88 +1,105 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
 
-import { Grid, Typography, Button } from "@material-ui/core";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+} from "@progress/kendo-react-layout";
+import { Form, FormElement, Field } from "@progress/kendo-react-form";
 import { withRouter, useHistory } from "react-router-dom";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { Button } from "@progress/kendo-react-buttons";
 import { useDispatch } from "react-redux";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
 
+import {
+  numericValidator,
+  nitValidator,
+  idTypeValidator,
+} from "../../utils/formValidators";
 import { saveDocumentData } from "./documentDataSlice";
+import { FormCombobox, FormInput } from "../../kendo/FormComponents";
 import { idTypeArr } from "../../utils/inputArrays";
-import { yupSchema } from "./documentDataUtils";
-
-import MainContainer from "../../material/MainContainer";
-import SelectInput from "../../material/SelectInput";
-import SubHeader from "../../material/SubHeader";
-import Input from "../../material/Input";
-import Form from "../../material/Form";
-
-const schema = yup.object().shape(yupSchema);
 
 const DocumentDataFormComponent = () => {
+  const [isPerson, setIsPerson] = useState(true);
+
   const history = useHistory();
-
-  const { register, watch, handleSubmit, errors, control } = useForm({
-    mode: "onBlur",
-    resolver: yupResolver(schema),
-  });
-
-  const watchIdType = watch("idType", "CC");
 
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
-    dispatch(saveDocumentData(data));
-    history.push("/userDataForm");
+  const onIdTypeChange = (type) => {
+    type.value === "NIT" ? setIsPerson(false) : setIsPerson(true);
+  };
+
+  const handleSubmit = (dataItem) => {
+    dispatch(saveDocumentData(dataItem));
+    history.push("/vehicleByPlateResult");
   };
 
   return (
-    <MainContainer>
-      <SubHeader>Información Personal</SubHeader>
-      <Typography variant="subtitle1">
-        Por favor, indicanos tus datos
-      </Typography>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={6}>
-            <SelectInput
-              options={idTypeArr}
-              name="idType"
-              control={control}
-              ref={register}
-              defaultValue={"CC"}
-              label="Tipo de Documento"
-              error={!!errors.idType}
-              helperText={errors?.idType?.message}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Input
-              type="text"
-              fullWidth
-              label={
-                watchIdType === "NIT" ? "Número NIT" : "Número de documento"
-              }
-              name="idNumber"
-              control={control}
-              ref={register}
-              error={!!errors.idNumber}
-              helperText={errors?.idNumber?.message}
-            />
-          </Grid>
-          <Grid container item xs={12} justify="center">
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              size="large"
-            >
-              Continuar
-            </Button>
-          </Grid>
-        </Grid>
-      </Form>
-    </MainContainer>
+    <Fragment>
+      <div className="container-fluid">
+        <main className="d-flex justify-content-center align-content-center">
+          <Card
+            style={{
+              width: 500,
+              boxShadow: "0 0 4px 0 rgba(0,0,0,.1)",
+              marginTop: 15,
+            }}
+          >
+            <CardHeader>
+              <CardTitle style={{ textAlign: "center" }}>
+                INFORMACIÓN DE DOCUMENTO
+              </CardTitle>
+              <CardBody>
+                <Form
+                  onSubmit={handleSubmit}
+                  initialValues={{
+                    idType: { value: "CC", label: "Cedula de Ciudadanía" },
+                  }}
+                  render={(formRenderProps) => (
+                    <FormElement style={{ width: 400 }}>
+                      {/*<fieldset className={"k-form-fieldset"}>
+                        <legend className={"k-form-legend"}>
+                          PLATE SEARCH
+                  </legend>*/}
+                      <Field
+                        data={idTypeArr}
+                        textField="label"
+                        name={"idType"}
+                        label={"Tipo de Documento"}
+                        component={FormCombobox}
+                        validator={idTypeValidator}
+                        onClose={(e) => onIdTypeChange(e.target.value)}
+                      />
+                      <Field
+                        id={"idNumber"}
+                        name={"idNumber"}
+                        label={
+                          isPerson ? "Número de Documento" : "Número de NIT"
+                        }
+                        component={FormInput}
+                        validator={isPerson ? numericValidator : nitValidator}
+                      />
+                      <span className={"k-form-separator"} />
+                      <div className="k-form-buttons k-buttons-end">
+                        <Button primary={true} type={"submit"} icon="search">
+                          Consultar
+                        </Button>
+                        {/*<Button onClick={formRenderProps.onFormReset}>
+                          Clear
+                        </Button>*}
+                      {/*</fieldset>*/}
+                      </div>
+                    </FormElement>
+                  )}
+                />
+              </CardBody>
+            </CardHeader>
+          </Card>
+        </main>
+      </div>
+    </Fragment>
   );
 };
 

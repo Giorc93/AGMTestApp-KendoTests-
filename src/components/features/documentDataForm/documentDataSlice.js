@@ -13,7 +13,7 @@ export const documentDataSlice = createSlice({
   reducers: {
     saveDocumentData: (state, action) => {
       state.documentData = {
-        idType: action.payload.idType,
+        idType: action.payload.idType.value,
         idNumber: action.payload.idNumber,
       };
     },

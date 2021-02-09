@@ -1,15 +1,11 @@
+import React from "react";
+
 import Routing from "./Routing";
 
-import AppContainer from "./components/material/AppContainer";
-import NavBar from "./components/material/NavBar";
+import "@progress/kendo-theme-bootstrap/dist/all.css";
 
 function App() {
-  return (
-    <AppContainer>
-      <NavBar />
-      <Routing />
-    </AppContainer>
-  );
+  return <Routing />;
 }
 
 export default App;

@@ -6,6 +6,7 @@ import DocumentDataFormComponent from "./components/features/documentDataForm/Do
 import VehicleSearchComponent from "./components/features/vehicleSearch/VehicleSearchComponent";
 import UserDataFormComponent from "./components/features/userDataForm/UserDataFormComponent";
 import GetQuotationComponent from "./components/features/getQuotation/GetQuotationComponent";
+import PlateSearchComponent from "./components/features/plateSearch/PlateSearchComponent";
 import ErrorComponent from "./components/features/error/ErrorComponent";
 import HomeComponent from "./components/features/home/HomeComponent";
 
@@ -14,6 +15,7 @@ const Routing = () => {
     <Switch>
       <Route exact path="/" component={HomeComponent} />
       <Route exact path="/home" component={HomeComponent} />
+      <Route exact path="/plateSearch" component={PlateSearchComponent} />
       <Route exact path="/userDataForm" component={UserDataFormComponent} />
       <Route exact path="/getQuotation" component={GetQuotationComponent} />
       <Route exact path="/vehicleSearch" component={VehicleSearchComponent} />

@@ -9,6 +9,7 @@ import getQuotationReducer from "../components/features/getQuotation/getQuotatio
 import getPlaceListReducer from "../components/features/getPlaceList/getPlaceListSlice";
 import plateDataReducer from "../components/features/plateSearch/plateDataSlice";
 import userDataReducer from "../components/features/userDataForm/userDataSlice";
+import globalReducer from "../components/features/globalSlice";
 
 export default configureStore({
   reducer: {
@@ -19,6 +20,7 @@ export default configureStore({
     brandsData: getBrandsListReducer,
     placeData: getPlaceListReducer,
     plateData: plateDataReducer,
+    globalData: globalReducer,
     userData: userDataReducer,
   },
 });
